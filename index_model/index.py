@@ -12,10 +12,14 @@ class IndexModel:
     def __init__(self) -> None:
         
         #importing dataset
-        data=pd.read_csv("/Users/adamnovak/Desktop/solactive_code_novak/data_sources/stock_prices.csv")
-        data.insert(1,"Datetime", self.date_transform(data.iloc[:,0]))
-        self.data=data
-        
+        try:
+            data=pd.read_csv("/Users/adamnovak/Desktop/solactive_code_novak/data_sources/stock_prices.csv")
+            data.insert(1,"Datetime", self.date_transform(data.iloc[:,0]))
+            self.data=data
+        except: 
+            print("Data cannot be found. Working directory should be adjusted.")
+            return 
+
     def date_transform(self, date_array) -> None:
         
         #adding datetime format to dataframe
